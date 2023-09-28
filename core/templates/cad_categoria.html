@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Categorias</title>
+</head>
+<body>
+    <form action="{% url 'cad_categoria' %}" method="post">
+        {% csrt_token %}
+        {{formCadCategoria.as_p}}
+        <button type="submit">Cadastrar</button>
+    </form>
+    <table>
+        <tr>
+            <th>Nome</th>
+        </tr>
+        <tr>
+            {% for categoria in categorias %}
+            <td>
+                {{categoria.nome}}
+            </td>
+            {% endfor %}
+        </tr>
+    </table>
+</body>
+</html>
