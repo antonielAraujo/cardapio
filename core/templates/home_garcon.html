@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Área do Garçon</title>
 </head>
 <body style="display: flex; align-content: center; text-align: center; align-items: center;">
     <fieldset>
-        <legend><h1>Restaurante da Zefinha</h1></legend>
-        <button type="button"><a href="{% url 'home_adm' %}">Área Administrativa</a></button>
-        <button type="button"><a href="{% url 'home_garcon' %}">Área do Garçon</button></a>
+        <legend><h3>MENÚ</h3></legend>
+        <button type="button"><a href="{% url 'home_garcon' %}">Novo Pedido</a></button>
     </fieldset>
+    <button type="button"><a href="{% url 'home' %}">Sair</a></button> 
 </body>
 </html>

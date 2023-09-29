@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Categorias</title>
+    <title>Cadastrar Comidas</title>
 </head>
 <body style="display: flex; justify-content: center; text-align: center; align-items: center;">
     <fieldset>
-        <h1>Cadastro de categorias</h1>
-        <legend><h2>CATEGORIAS</h2></legend>
-        <form action="{% url 'cad_categoria' %}" method="post">
+        <h1>Cadastro de Comidas</h1>
+        <legend><h2>COMIDAS</h2></legend>
+        <form action="{% url 'cad_comida' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{formCadCategoria}}
+            {{formCadComida.as_p}}
             <button type="submit">Cadastrar</button>
             <button type="button"><a href="{% url 'home' %}">Sair</a></button>       
         </form>
         <br>
         <fieldset style="display: flex; text-align: center; align-content: center; align-items: center; justify-content: center;">
-            <legend>Categorias Cadastradas</legend>
+            <legend>Comidas Cadastradas</legend>
             <table>
                 <tr>
                     <th>Nome</th>
                 </tr>
-                {% for categoria in categorias %}
+                {% for comida in comidas %}
                 <tr>
-                    <td>
-                        {{categoria.nome}}
-                    </td>
+                    <td>{{comida.nome}}</td>
+                    <td><img src="{{ comida.imagem.url}}"></td>
                 </tr>
                 {% endfor %}
             </table>

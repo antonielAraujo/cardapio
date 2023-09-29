@@ -17,7 +17,10 @@ class Comida(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
 
 class Pedido(models.Model):
-    comidas = models.ManyToManyField(Comida)
-    quantidade = models.IntegerField()
     data = models.DateTimeField(default=datetime)
     pagamento = models.CharField(max_length=1)
+
+class ComidasPedidos(models.Model):
+    comida = models.ForeignKey(Comida, on_delete=models.CASCADE)
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
+    quantidade = models.IntegerField()

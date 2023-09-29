@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrativo</title>
+</head>
+<body style="display: flex; align-content: center; text-align: center; align-items: center;">
+    <fieldset>
+        <legend><h3>MENÚ</h3></legend>
+        <button type="button"><a href="{% url 'cad_categoria' %}">Cadastrar Categorias de Comidas</a></button>
+        <button type="button"><a href="{% url 'cad_comida' %}">Cadastrar Comidas</a></button>
+    </fieldset>
+    <button type="button"><a href="{% url 'home' %}">Sair</a></button> 
+</body>
+</html>

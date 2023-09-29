@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comidas e Pedidos</title>
+</head>
+<body style="display: flex; justify-content: center; text-align: center; align-items: center;">
+    <fieldset>
+        <h1>Comidas e Pedidos</h1>
+        <legend><h2>Novo Pedido</h2></legend>
+        <form action="{% url 'comidas_pedidos' %}" method="post">
+            {% csrf_token %}
+            {{formComidasPedidos.as_p}}
+            <button type="submit">Fechar</button>
+            <button type="button"><a href="{% url 'home_garcon' %}">Sair</a></button>       
+        </form>
+        <br>
+        <fieldset style="display: flex; text-align: center; align-content: center; align-items: center; justify-content: center;">
+        </fieldset>
+    </fieldset>
+</body>
+</html>
