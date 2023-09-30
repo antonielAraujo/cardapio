@@ -22,11 +22,20 @@
             <table>
                 <tr>
                     <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Estoque</th>
+                    <th>Imagem</th>
+                    <th>Categoria</th>
                 </tr>
                 {% for comida in comidas %}
                 <tr>
                     <td>{{comida.nome}}</td>
-                    <td><img src="{{ comida.imagem.url}}"></td>
+                    <td>{{comida.descricao}}</td>
+                    <td>{{comida.preco}}</td>
+                    <td>{{comida.estoque}}</td>
+                    <td><a href="C:\Users\TURMA97\Desktop\D_NQ_NP_860920-MLA43880607295_102020-O.jpg"><img style="display: flex; width: 50px;" src="{{ comida.imagem.url}}"></a></td>
+                    <td>{{comida.categoria}}</td>
                 </tr>
                 {% endfor %}
             </table>

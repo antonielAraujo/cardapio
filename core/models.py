@@ -17,7 +17,7 @@ class Comida(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
 
 class Pedido(models.Model):
-    data = models.DateTimeField(default=datetime)
+    data = models.DateTimeField(default=datetime.now())
     pagamento = models.CharField(max_length=1)
 
 class ComidasPedidos(models.Model):

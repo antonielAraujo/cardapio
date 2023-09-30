@@ -12,8 +12,7 @@
         <form action="{% url 'comidas_pedidos' %}" method="post">
             {% csrf_token %}
             {{formComidasPedidos.as_p}}
-            <button type="submit">Fechar</button>
-            <button type="button"><a href="{% url 'home_garcon' %}">Sair</a></button>       
+            <button type="submit">Fechar</button>       
         </form>
         <br>
         <fieldset style="display: flex; text-align: center; align-content: center; align-items: center; justify-content: center;">
