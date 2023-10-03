@@ -21,6 +21,6 @@ class Pedido(models.Model):
     pagamento = models.CharField(max_length=1)
 
 class ComidasPedidos(models.Model):
-    comida = models.ForeignKey(Comida, on_delete=models.CASCADE)
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
+    comida = models.ForeignKey(Comida, on_delete=models.CASCADE)
     quantidade = models.IntegerField()

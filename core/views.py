@@ -51,6 +51,7 @@ def pedido(request):
 def comidas_pedidos(request):
     comidas = Comida.objects.all()
     pedido = Pedido.objects.all()
+    
     if request.method == 'POST':
         form = FormComidasPedidos(request.POST)
         if form.is_valid():
