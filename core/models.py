@@ -15,7 +15,9 @@ class Comida(models.Model):
     estoque = models.IntegerField()
     imagem = models.ImageField(upload_to='imagens/')
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
-
+    def __str__(self):
+        return self.nome
+        
 class Pedido(models.Model):
     data = models.DateTimeField(default=datetime.now())
     pagamento = models.CharField(max_length=1)

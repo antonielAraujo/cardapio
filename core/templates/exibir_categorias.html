@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <fieldset>
+        <legend><h1>CATEGORIAS</h1></legend>
+        <table>
+            <tr>
+                <th>Nome Categoria</th>
+            </tr>
+            {% for categoria in categorias %}
+            <tr>
+                <td>{{categoria.nome}}</td>
+                <td><button type="button">
+                    <a href="{% url 'editar_categoria' categoria.id %}">Editar</a>
+                </button></td>
+                <td><button type="button">
+                    <a href="{% url 'excluir_categoria' categoria.id %}">Excluir</a>
+                </button></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </fieldset>
+    <hr>
+    <button type="button"><a href="{% url 'home_adm' %}">Sair</a></button>
+</body>
+</html>

@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 from .models import *
 from django import forms
+from django.forms import DateInput
 
 class FormCadCategoria(ModelForm):
     class Meta:
@@ -19,6 +20,9 @@ class FormPedido(ModelForm):
     class Meta:
         model = Pedido
         fields = ['data', 'pagamento']
+        widgets = {
+            'data': DateInput(attrs={'type':'date'})
+        }
 
 class FormComidasPedidos(ModelForm):
     class Meta:
