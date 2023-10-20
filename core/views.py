@@ -111,3 +111,57 @@ def excluir_comida(request, id_comida):
 
 ### INÍCIO DO CRUD DE PEDIDOS
 
+# FUNÇÃO INICIAR PEDIDO
+def novo_pedido(request):
+    if request.method == 'POST':
+        form = FormPedido(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(exibir_pedidos)
+    else:
+        form = FormPedido()
+    context = {
+        'form': form
+    }
+    return render(request, 'novo_pedido.html', context)
+
+# FUNÇÃO EXIBIR TODOS OS PEDIDOS
+def exibir_pedidos(request):
+    context = {
+        'pedidos': Pedido.objects.all()
+    }
+    return render(request, 'exibir_pedidos.html', context)
+
+# FUNÇÃO EDITAR PEDIDO
+def editar_pedido(request, id_pedido):
+    pedido = Pedido.objects.get(id=id_pedido)
+    if request.method == 'POST':
+        form = FormPedido(request.POST, instance=pedido)
+        if form.is_valid():
+            form.save()
+            return redirect(exibir_pedidos)
+    else:
+        form = FormPedido(instance=pedido)
+    context = {
+        'form': form,
+        'pedido': pedido
+    }
+    return render(request, 'editar_pedido.html', context)
+
+# FUNÇÃO ADICIONAR COMIDA EM PEDIDOS
+def adicionar_comida(request, id_pedido):
+    pedido = Pedido.objects.get(id=id_pedido)
+    comidas = Comida.objects.all()
+    if request.method == 'POST':
+        form = FormComidasPedidos(request.POST, instance=pedido)
+        if form.is_valid():
+            form.save()
+            return redirect(exibir_pedidos)
+    else:
+        form = FormComidasPedidos(instance=pedido)
+    context = {
+        'form': form,
+        'pedido': pedido,
+        'comdidas': comidas
+    }
+    return render(request, 'adicionar_comida.html', context)

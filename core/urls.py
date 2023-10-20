@@ -22,6 +22,9 @@ urlpatterns = [
     path('excluir_comida/<int:id_comida>', excluir_comida, name='excluir_comida'),
     
     # CRUD DOS PEDIDOS
-    
+    path('novo_pedido/', novo_pedido, name='novo_pedido'),
+    path('exibir_pedidos/', exibir_pedidos, name='exibir_pedidos'),
+    path('editar_pedido/<int:id_pedido>', editar_pedido, name='editar_pedido'),
+    path('adicionar_comida/<int:id_pedido>', adicionar_comida, name='adicionar_comida')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

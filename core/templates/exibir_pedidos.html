@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Todos os Pedidos</h1>
+    <fieldset>
+        <table>
+            <tr>
+                <th>Nº Pedido</th>
+                <th>Data</th>
+                <th>Pagamento</th>
+            </tr>
+            {% for pedido in pedidos %}
+            <tr>
+                <td>{{pedido.id}}</td>
+                <td>{{pedido.data}}</td>
+                <td>{{pedido.pagamento}}</td>
+                <td><button type="button"><a href="{% url 'editar_pedido' pedido.id %}">Editar</a></button></td>
+                <td><button type="button"><a href="{% url 'adicionar_comida' pedido.id %}">Adicionar comidas</a></button></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </fieldset>
+</body>
+</html>
