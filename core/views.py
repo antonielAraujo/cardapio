@@ -88,44 +88,26 @@ def exibir_comidas(request):
 def editar_comida(request, id_comida):
     comida_puxada = Comida.objects.get(id=id_comida)
     if request.method == 'POST':
-        form = FormCadComida(request.POST, request.FILE, instance=comida_puxada)
+        form = FormCadComida(request.POST, request.FILES, instance=comida_puxada)
         if form.is_valid():
             form.save()
             return redirect(exibir_comidas)
     else:
-        form = FormCadComida(request.FILE, instance=comida_puxada)
+        form = FormCadComida(instance=comida_puxada)
     context = {
         'form': form,
         'comida': comida_puxada
     }
     return render(request, 'editar_comida.html', context)
 
+# FUNÇÃO EXCLUIR COMIDA
+def excluir_comida(request, id_comida):
+    comida = Comida.objects.get(id=id_comida)
+    comida.delete()
+    return redirect(exibir_comidas)
+
 
 ### FIM DO CRUD CADASTRO DE COMIDAS
 
-def pedido(request):
-    if request.method == 'POST':
-        form = FormPedido(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(comidas_pedidos)
-    else:
-        form = FormPedido()
-    return render(request, 'pedido.html', {'formPedido': form})
+### INÍCIO DO CRUD DE PEDIDOS
 
-def comidas_pedidos(request):
-    comidas = Comida.objects.all()
-    pedido = Pedido.objects.all()
-    
-    if request.method == 'POST':
-        form = FormComidasPedidos(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(pedido_fechado)
-    else:
-        form = FormComidasPedidos()
-    return render(request, 'comidas_pedidos.html', {'formComidasPedidos': form, 'comidas': comidas, 'pedido': pedido})
-
-def pedido_fechado(request, id_pedido):
-    pedidos = Pedido.objects.get(id=id_pedido)  
-    return render(request, 'pedido_fechado.html', {'pedidos': pedidos})

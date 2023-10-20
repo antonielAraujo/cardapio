@@ -19,12 +19,9 @@ urlpatterns = [
     path('cad_comida/', cad_comida, name='cad_comida'),
     path('exibir_comidas/', exibir_comidas, name='exibir_comidas'),
     path('editar_comida/<int:id_comida>', editar_comida, name='editar_comida'),
+    path('excluir_comida/<int:id_comida>', excluir_comida, name='excluir_comida'),
     
-    # CRUD DO PEDIDO
-    path('pedido/', pedido, name='pedido'),
-
-    # CRUD DE COMIDAS PEDIDOS
-    path('comidas_pedidos', comidas_pedidos, name='comidas_pedidos'),
-    path('pedido_fechado/<int:id_pedido>', pedido_fechado, name='pedido_fechado')
+    # CRUD DOS PEDIDOS
+    
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

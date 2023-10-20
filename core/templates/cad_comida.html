@@ -13,33 +13,13 @@
         <form action="{% url 'cad_comida' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{formCadComida.as_p}}
-            <button type="submit">Cadastrar</button>
-            <button type="button"><a href="{% url 'home' %}">Sair</a></button>       
+            <button type="submit">Salvar</button>     
         </form>
         <br>
-        <fieldset style="display: flex; text-align: center; align-content: center; align-items: center; justify-content: center;">
-            <legend>Comidas Cadastradas</legend>
-            <table>
-                <tr>
-                    <th>Nome</th>
-                    <th>Descrição</th>
-                    <th>Preço</th>
-                    <th>Estoque</th>
-                    <th>Imagem</th>
-                    <th>Categoria</th>
-                </tr>
-                {% for comida in comidas %}
-                <tr>
-                    <td>{{comida.nome}}</td>
-                    <td>{{comida.descricao}}</td>
-                    <td>{{comida.preco}}</td>
-                    <td>{{comida.estoque}}</td>
-                    <td><a href="C:\Users\TURMA97\Desktop\D_NQ_NP_860920-MLA43880607295_102020-O.jpg"><img style="display: flex; width: 50px;" src="{{ comida.imagem.url}}"></a></td>
-                    <td>{{comida.categoria}}</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </fieldset>
+        <button type="button"><a href="{% url 'exibir_comidas' %}">Exibir Comidas</a></button>
+        <br>
+        <br>
+        <button type="button"><a href="{% url 'home' %}">Sair</a></button>  
     </fieldset>
 </body>
 </html>
