@@ -21,10 +21,10 @@ class FormPedido(ModelForm):
         model = Pedido
         fields = ['data', 'pagamento']
         widgets = {
-            'data': DateInput(attrs={'type':'date'})
+            'data': DateInput(attrs={'type':'datetime-local'})
         }
 
 class FormComidasPedidos(ModelForm):
     class Meta:
         model = ComidasPedidos
-        fields = ['pedido','comida', 'quantidade']
+        fields = ['pedido', 'comida', 'quantidade']

@@ -8,10 +8,10 @@
 <body>
     <fieldset>
         <legend><h1>Adicionar Comidas</h1></legend>
-        <form action="{% url 'adicionar_comida' pedido.id %}">
+        <form action="{% url 'adicionar_comida' pedido.id %}" method="post">
             {% csrf_token %}
             {{form.as_p}}
-            <button type="submit">Atualizar</button>
+            <button type="submit">Adicionar</button>
         </form>
     </fieldset>
 </body>

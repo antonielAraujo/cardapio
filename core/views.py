@@ -153,15 +153,26 @@ def adicionar_comida(request, id_pedido):
     pedido = Pedido.objects.get(id=id_pedido)
     comidas = Comida.objects.all()
     if request.method == 'POST':
-        form = FormComidasPedidos(request.POST, instance=pedido)
+        form = FormComidasPedidos(request.POST)
         if form.is_valid():
             form.save()
             return redirect(exibir_pedidos)
     else:
-        form = FormComidasPedidos(instance=pedido)
+        form = FormComidasPedidos()
     context = {
         'form': form,
         'pedido': pedido,
-        'comdidas': comidas
+        'comidas': comidas
     }
     return render(request, 'adicionar_comida.html', context)
+
+# FUNÇÃO RESUMO PEDIDO
+def resumo_pedido(request, id_pedido):
+    resumo = ComidasPedidos.objects.filter(id=id_pedido)
+    context = {
+        'resumo': resumo
+    }
+    return render(request, 'resumo_pedido.html', context)
+
+# FUNÇÃO EXCLUIR PEDIDO
+def excluir_pedido(request, )

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <fieldset>
+        <legend><h1>RESUMO DO PEDIDO</h1></legend>
+        <table>
+            <tr>
+                <th>Nº PEDIDO</th>
+                <th>COMIDAS</th>
+                <th>QTD</th>
+            </tr>
+            {% for p in resumo %}
+            <tr>
+                <td>{{p.pedido}}</td>
+                <td>{{p.comida}}</td>
+                <td>{{p.quantidade}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </fieldset>
+    <button><a href="{% url 'exibir_pedidos' %}">Voltar</a></button>
+</body>
+</html>

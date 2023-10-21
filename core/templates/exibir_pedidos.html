@@ -21,6 +21,7 @@
                 <td>{{pedido.pagamento}}</td>
                 <td><button type="button"><a href="{% url 'editar_pedido' pedido.id %}">Editar</a></button></td>
                 <td><button type="button"><a href="{% url 'adicionar_comida' pedido.id %}">Adicionar comidas</a></button></td>
+                <td><button type="button"><a href="{% url 'resumo_pedido' pedido.id %}">Resumo do Pedido</a></button></td>
             </tr>
             {% endfor %}
         </table>

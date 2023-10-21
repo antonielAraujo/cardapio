@@ -20,9 +20,9 @@ class Comida(models.Model):
         
 class Pedido(models.Model):
     data = models.DateTimeField(default=datetime.now())
-    pagamento = models.CharField(max_length=1)
-    def __int__(self):
-        return self.id
+    pagamento = models.CharField(max_length=1, default='F')
+    def __str__(self):
+        return f'{self.id}'
 
 class ComidasPedidos(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
