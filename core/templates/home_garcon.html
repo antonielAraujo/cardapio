@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Área do Garçon</title>
 </head>
-<body style="display: flex; align-content: center; text-align: center; align-items: center;">
-    <fieldset>
-        <legend><h3>PEDIDOS</h3></legend>
-        <button type="button"><a href="{% url 'novo_pedido' %}">Novo Pedido</a></button>
-        <button type="button"><a href="{% url 'exibir_pedidos' %}">Exibir Pedidos</a></button>
-    </fieldset>
+<body>
+    <div style="display: flex; align-content: center; text-align: center; align-items: center;">
+        <fieldset>
+            <legend><h3>PEDIDOS</h3></legend>
+            <button type="button"><a href="{% url 'novo_pedido' %}">Novo Pedido</a></button>
+            <button type="button"><a href="{% url 'exibir_pedidos' %}">Exibir Pedidos</a></button>
+        </fieldset>
+    </div>
+    <br>
     <button type="button"><a href="{% url 'home' %}">Sair</a></button> 
 </body>
 </html>

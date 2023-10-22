@@ -6,14 +6,16 @@
     <title>Administrativo</title>
 </head>
 <body style="align-content: center; align-items: center;">
-    <fieldset style="display: flex; text-align: center; align-content: center; align-items: center; justify-content: center;">
-        <legend><h3>MENÚ</h3></legend>
-        <button type="button"><a href="{% url 'cad_categoria' %}">Cadastrar Categorias de Comidas</a></button>
-        <button type="button"><a href="{% url 'exibir_categorias' %}">Exibir Categorias</a></button>
-        <button type="button"><a href="{% url 'cad_comida' %}">Cadastrar Comidas</a></button>
-        <button type="button"><a href="{% url 'exibir_comidas' %}">Exibir Comidas</a></button>
-    </fieldset>
-    <hr>
+    <div style="display: flex; text-align: center; align-content: center; align-items: center; justify-content: center;">
+        <fieldset>
+            <legend><h3>MENÚ</h3></legend>
+            <button type="button"><a href="{% url 'cad_categoria' %}">Cadastrar Categorias de Comidas</a></button>
+            <button type="button"><a href="{% url 'exibir_categorias' %}">Exibir Categorias</a></button>
+            <button type="button"><a href="{% url 'cad_comida' %}">Cadastrar Comidas</a></button>
+            <button type="button"><a href="{% url 'exibir_comidas' %}">Exibir Comidas</a></button>
+        </fieldset>
+    </div>
+    <br>
     <button type="button"><a href="{% url 'home' %}">Sair</a></button> 
 </body>
 </html>
