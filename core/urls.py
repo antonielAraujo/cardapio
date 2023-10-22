@@ -27,7 +27,11 @@ urlpatterns = [
     path('editar_pedido/<int:id_pedido>', editar_pedido, name='editar_pedido'),
     path('adicionar_comida/<int:id_pedido>', adicionar_comida, name='adicionar_comida'),
     path('resumo_pedido/<int:id_pedido>', resumo_pedido, name='resumo_pedido'),
-    path('excluir_pedido/<int:id_pedido>', excluir_pedido, name='excluir_pedido')
+    path('excluir_pedido/<int:id_pedido>', excluir_pedido, name='excluir_pedido'),
+    path('fechar_pedido/<int:id_pedido>', fechar_pedido, name='fechar_pedido'),
+    path('pagina_erro/', pagina_erro, name='pagina_erro')
+    # path('exibir_pedidos_fechados/', exibir_pedidos_fechados, name='exibir_pedidos_fechados')
+
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -20,7 +20,7 @@ class Comida(models.Model):
         
 class Pedido(models.Model):
     data = models.DateTimeField(default=datetime.now())
-    pagamento = models.CharField(max_length=1, default='F')
+    pagamento = models.CharField(max_length=1, default='A')
     def __str__(self):
         return f'{self.id}'
 

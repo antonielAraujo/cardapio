@@ -135,6 +135,8 @@ def exibir_pedidos(request):
 # FUNÇÃO EDITAR PEDIDO
 def editar_pedido(request, id_pedido):
     pedido = Pedido.objects.get(id=id_pedido)
+    if pedido.pagamento == 'F':
+        return redirect(pagina_erro)
     if request.method == 'POST':
         form = FormPedido(request.POST, instance=pedido)
         if form.is_valid():
@@ -152,10 +154,13 @@ def editar_pedido(request, id_pedido):
 def adicionar_comida(request, id_pedido):
     pedido = Pedido.objects.get(id=id_pedido)
     comidas = Comida.objects.all()
-    if request.method == 'POST':
+    if pedido.pagamento == 'F':
+        return redirect(pagina_erro)
+    elif request.method == 'POST':
         form = FormComidasPedidos(request.POST)
         if form.is_valid():
             form.save()
+            print('AQUI O PROGRAMA SALVOU!')
             return redirect(exibir_pedidos)
     else:
         form = FormComidasPedidos()
@@ -168,11 +173,33 @@ def adicionar_comida(request, id_pedido):
 
 # FUNÇÃO RESUMO PEDIDO
 def resumo_pedido(request, id_pedido):
-    resumo = ComidasPedidos.objects.filter(id=id_pedido)
+    resumo = ComidasPedidos.objects.filter(pedido=id_pedido)
     context = {
         'resumo': resumo
     }
     return render(request, 'resumo_pedido.html', context)
 
 # FUNÇÃO EXCLUIR PEDIDO
-def excluir_pedido(request, )
+def excluir_pedido(request, id_pedido):
+    pedido = Pedido.objects.get(id=id_pedido)
+    if pedido.pagamento == 'F':
+        return redirect(pagina_erro)
+    pedido.delete()
+    return redirect(exibir_pedidos)
+
+# FUNÇÃO FECHAR PEDIDO
+def fechar_pedido(request, id_pedido):
+    pedido = Pedido.objects.get(id=id_pedido)
+    if pedido.pagamento == 'F':
+        return redirect(pagina_erro)
+    elif pedido.pagamento == 'A':
+        pedido.pagamento = 'F'
+        pedido.save()
+        return redirect(exibir_pedidos)
+
+# FUNÇÃO PÁGINA DE ERRO
+def pagina_erro(request):
+    return render(request, 'pagina_erro.html')
+# # FUNÇÃO EXIBIR PEDIDOS FECHADOS
+# def exibir_pedidos_fechados(request):
+#     pedidos = Pedido.objects.filter()
