@@ -24,4 +24,4 @@ class FormPedido(ModelForm):
 class FormComidasPedidos(ModelForm):
     class Meta:
         model = ComidasPedidos
-        fields = ['pedido', 'comida', 'quantidade']
+        fields = ['comida', 'quantidade']

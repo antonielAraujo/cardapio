@@ -65,8 +65,9 @@ def cad_categoria(request):
     if request.method == 'POST':
         form = FormCadCategoria(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect(cad_categoria)
+            if request.user.is_staff == 1:
+                form.save()
+                return redirect(cad_categoria)
     else:
         form = FormCadCategoria()
     return render(request, 'cad_categoria.html', {'formCadCategoria': form, 'categorias': categorias})
@@ -84,11 +85,13 @@ def exibir_categorias(request):
 @login_required(login_url='logar/')
 def editar_categoria(request, id_categoria):
     categoria_puxada = Categoria.objects.get(id=id_categoria)
+    
     if request.method == 'POST':
         form = FormCadCategoria(request.POST, instance=categoria_puxada)
         if form.is_valid():
-            form.save()
-            return redirect(exibir_categorias)
+            if request.user.is_staff == 1:
+                form.save()
+                return redirect(exibir_categorias)
     else:
         form = FormCadCategoria(instance=categoria_puxada)
     context = {
@@ -100,9 +103,10 @@ def editar_categoria(request, id_categoria):
 # FUNÇÃO EXCLUIR CATEGORIA
 @login_required(login_url='logar/')
 def excluir_categoria(request, id_categoria):
-    categoria_puxada = Categoria.objects.get(id=id_categoria)
-    categoria_puxada.delete()
-    return redirect(exibir_categorias)
+    if request.user.is_staff == 1:
+        categoria_puxada = Categoria.objects.get(id=id_categoria)
+        categoria_puxada.delete()
+        return redirect(exibir_categorias)
 ### FIM DO CRUD DE CATEGORIA
 
 
@@ -115,8 +119,9 @@ def cad_comida(request):
     if request.method == 'POST':
         form = FormCadComida(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect(cad_comida)
+            if request.user.is_staff == 1:
+                form.save()
+                return redirect(cad_comida)
     else:
         form = FormCadComida()
     return render(request, 'cad_comida.html', {'formCadComida': form, 'comidas': comidas})
@@ -134,11 +139,13 @@ def exibir_comidas(request):
 @login_required(login_url='logar/')
 def editar_comida(request, id_comida):
     comida_puxada = Comida.objects.get(id=id_comida)
+    
     if request.method == 'POST':
         form = FormCadComida(request.POST, request.FILES, instance=comida_puxada)
         if form.is_valid():
-            form.save()
-            return redirect(exibir_comidas)
+            if request.user.is_staff == 1:
+                form.save()
+                return redirect(exibir_comidas)
     else:
         form = FormCadComida(instance=comida_puxada)
     context = {
@@ -150,8 +157,9 @@ def editar_comida(request, id_comida):
 # FUNÇÃO EXCLUIR COMIDA
 @login_required(login_url='logar/')
 def excluir_comida(request, id_comida):
-    comida = Comida.objects.get(id=id_comida)
-    comida.delete()
+    if request.user.is_staff == 1:
+        comida = Comida.objects.get(id=id_comida)
+        comida.delete()
     return redirect(exibir_comidas)
 
 
@@ -182,24 +190,6 @@ def exibir_pedidos(request):
     }
     return render(request, 'exibir_pedidos.html', context)
 
-# # FUNÇÃO EDITAR PEDIDO
-# def editar_pedido(request, id_pedido):
-#     pedido = Pedido.objects.get(id=id_pedido)
-#     if pedido.pagamento == 'F':
-#         return redirect(pagina_erro)
-#     if request.method == 'POST':
-#         form = FormPedido(request.POST, instance=pedido)
-#         if form.is_valid():
-#             form.save()
-#             return redirect(exibir_pedidos)
-#     else:
-#         form = FormPedido(instance=pedido)
-#     context = {
-#         'form': form,
-#         'pedido': pedido
-#     }
-#     return render(request, 'editar_pedido.html', context)
-
 # FUNÇÃO ADICIONAR COMIDA EM PEDIDOS
 @login_required(login_url='logar/')
 def adicionar_comida(request, id_pedido):
@@ -210,7 +200,9 @@ def adicionar_comida(request, id_pedido):
     elif request.method == 'POST':
         form = FormComidasPedidos(request.POST)
         if form.is_valid():
-            form.save()
+            lancamento = form.save(commit=False)
+            lancamento.pedido = pedido
+            lancamento.save()
             return redirect(exibir_pedidos)
     else:
         form = FormComidasPedidos()
