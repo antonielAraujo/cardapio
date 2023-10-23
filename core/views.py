@@ -234,7 +234,9 @@ def resumo_pedido(request, id_pedido):
 @login_required(login_url='logar/')
 def editar_resumo_pedido(request, id_comidas_pedidos):
     comida_pedido = ComidasPedidos.objects.get(id=id_comidas_pedidos)
-    if request.method == 'POST':
+    if comida_pedido.pedido.pagamento == 'F':
+         return redirect(pagina_erro)
+    elif request.method == 'POST':
         form = FormComidasPedidos(request.POST, instance=comida_pedido)
         if form.is_valid():
             form.save()
@@ -251,8 +253,11 @@ def editar_resumo_pedido(request, id_comidas_pedidos):
 @login_required(login_url='logar/')
 def excluir_item_pedido(request, id_comidas_pedidos):
     comida_pedido = ComidasPedidos.objects.get(id=id_comidas_pedidos)
-    comida_pedido.delete()
-
+    if comida_pedido.pedido.pagamento == 'F':
+         return redirect(pagina_erro)
+    else:
+        comida_pedido.delete()
+        return redirect(exibir_pedidos)
 # FUNÇÃO EXCLUIR PEDIDO
 @login_required(login_url='logar/')
 def excluir_pedido(request, id_pedido):
