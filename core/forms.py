@@ -20,9 +20,6 @@ class FormPedido(ModelForm):
     class Meta:
         model = Pedido
         fields = ['data', 'pagamento']
-        # widgets = {
-        #     'data': DateInput(attrs={'type':'datetime-local'})
-        # }
 
 class FormComidasPedidos(ModelForm):
     class Meta:

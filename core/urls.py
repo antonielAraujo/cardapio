@@ -6,8 +6,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     # ÍNICIO DO SITE
     path('', home, name='home'),
-    path('home_adm/', home_adm, name='home_adm'),
-    path('home_garcom/', home_garcon, name='home_garcon'),
+    path('home_adm', home_adm, name='home_adm'),
+    path('home_garcon', home_garcon, name='home_garcon'),
     
     # CRUD DA CATEGORIA
     path('cad_categoria/', cad_categoria, name='cad_categoria'),
@@ -29,8 +29,12 @@ urlpatterns = [
     path('resumo_pedido/<int:id_pedido>', resumo_pedido, name='resumo_pedido'),
     path('excluir_pedido/<int:id_pedido>', excluir_pedido, name='excluir_pedido'),
     path('fechar_pedido/<int:id_pedido>', fechar_pedido, name='fechar_pedido'),
-    path('pagina_erro/', pagina_erro, name='pagina_erro')
-    # path('exibir_pedidos_fechados/', exibir_pedidos_fechados, name='exibir_pedidos_fechados')
+    path('pagina_erro/', pagina_erro, name='pagina_erro'),
+
+    # CRUD DE LOGIN
+    path('cadastrar_usuario/', cadastrar_usuario, name='cadastrar_usuario'),
+    path('logar/', logar, name='logar'),
+    path('deslogar/', deslogar, name='deslogar')
 
 
 
