@@ -182,23 +182,23 @@ def exibir_pedidos(request):
     }
     return render(request, 'exibir_pedidos.html', context)
 
-# FUNÇÃO EDITAR PEDIDO
-def editar_pedido(request, id_pedido):
-    pedido = Pedido.objects.get(id=id_pedido)
-    if pedido.pagamento == 'F':
-        return redirect(pagina_erro)
-    if request.method == 'POST':
-        form = FormPedido(request.POST, instance=pedido)
-        if form.is_valid():
-            form.save()
-            return redirect(exibir_pedidos)
-    else:
-        form = FormPedido(instance=pedido)
-    context = {
-        'form': form,
-        'pedido': pedido
-    }
-    return render(request, 'editar_pedido.html', context)
+# # FUNÇÃO EDITAR PEDIDO
+# def editar_pedido(request, id_pedido):
+#     pedido = Pedido.objects.get(id=id_pedido)
+#     if pedido.pagamento == 'F':
+#         return redirect(pagina_erro)
+#     if request.method == 'POST':
+#         form = FormPedido(request.POST, instance=pedido)
+#         if form.is_valid():
+#             form.save()
+#             return redirect(exibir_pedidos)
+#     else:
+#         form = FormPedido(instance=pedido)
+#     context = {
+#         'form': form,
+#         'pedido': pedido
+#     }
+#     return render(request, 'editar_pedido.html', context)
 
 # FUNÇÃO ADICIONAR COMIDA EM PEDIDOS
 @login_required(login_url='logar/')
@@ -229,6 +229,29 @@ def resumo_pedido(request, id_pedido):
         'resumo': resumo
     }
     return render(request, 'resumo_pedido.html', context)
+
+# FUNÇÃO EDITAR RESUMO DO PEDIDO
+@login_required(login_url='logar/')
+def editar_resumo_pedido(request, id_comidas_pedidos):
+    comida_pedido = ComidasPedidos.objects.get(id=id_comidas_pedidos)
+    if request.method == 'POST':
+        form = FormComidasPedidos(request.POST, instance=comida_pedido)
+        if form.is_valid():
+            form.save()
+            return redirect(exibir_pedidos)
+    else:
+        form = FormComidasPedidos(instance=comida_pedido)
+    context = {
+        'form': form,
+        'comida_pedido': comida_pedido
+    }
+    return render(request, 'editar_resumo_pedido.html', context)
+
+# FUNÇÃO EXCLUIR ITEM DE UM PEDIDO
+@login_required(login_url='logar/')
+def excluir_item_pedido(request, id_comidas_pedidos):
+    comida_pedido = ComidasPedidos.objects.get(id=id_comidas_pedidos)
+    comida_pedido.delete()
 
 # FUNÇÃO EXCLUIR PEDIDO
 @login_required(login_url='logar/')

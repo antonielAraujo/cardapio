@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +7,11 @@
 </head>
 <body>
     <fieldset>
-        <legend><h1>Editar Pedido</h1></legend>
-        <form action="" method="post">
+        <legend><h1>Editar Pedido {{pedido_comida.pedido}}</h1></legend>
+        <form action="{% url 'editar_resumo_pedido' comida_pedido.id %}" method="post">
             {% csrf_token %}
             {{form.as_p}}
-            <button type="submit">Atualizar</button>
+            <button type="submit">Alterar</button>
         </form>
     </fieldset>
 </body>

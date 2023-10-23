@@ -24,9 +24,10 @@ urlpatterns = [
     # CRUD DOS PEDIDOS
     path('novo_pedido/', novo_pedido, name='novo_pedido'),
     path('exibir_pedidos/', exibir_pedidos, name='exibir_pedidos'),
-    path('editar_pedido/<int:id_pedido>', editar_pedido, name='editar_pedido'),
     path('adicionar_comida/<int:id_pedido>', adicionar_comida, name='adicionar_comida'),
     path('resumo_pedido/<int:id_pedido>', resumo_pedido, name='resumo_pedido'),
+    path('editar_resumo_pedido/<int:id_comidas_pedidos>', editar_resumo_pedido, name='editar_resumo_pedido'),
+    path('excluir_item_pedido/<int:id_comidas_pedidos>', excluir_item_pedido, name='excluir_item_pedido'),
     path('excluir_pedido/<int:id_pedido>', excluir_pedido, name='excluir_pedido'),
     path('fechar_pedido/<int:id_pedido>', fechar_pedido, name='fechar_pedido'),
     path('pagina_erro/', pagina_erro, name='pagina_erro'),

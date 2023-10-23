@@ -16,18 +16,18 @@
             </tr>
             {% for pedido in pedidos %}
             <tr>
-                <td>{{pedido.id}}</td>
+                <td style="text-align: center;">{{pedido.id}}</td>
                 <td>{{pedido.data}}</td>
-                <td>{{pedido.pagamento}}</td>
-                <td><button type="button"><a style="color: yellow; background-color: rgb(104, 101, 101);" href="{% url 'editar_pedido' pedido.id %}">Editar</a></button></td>
-                <td><button type="button"><a style="color: red;" href="{% url 'excluir_pedido' pedido.id %}">Excluir</a></button></td>
+                <td style="text-align: center;">{{pedido.pagamento}}</td>
                 <td><button type="button"><a href="{% url 'adicionar_comida' pedido.id %}">Adicionar comidas</a></button></td>
                 <td><button type="button"><a href="{% url 'resumo_pedido' pedido.id %}">Resumo do Pedido</a></button></td>
                 <td><button type="button"><a style="color: green;" href="{% url 'fechar_pedido' pedido.id %}">Fechar Pedido</a></button></td>
+                <td><button type="button"><a style="color: red;" href="{% url 'excluir_pedido' pedido.id %}">Excluir</a></button></td>
             </tr>
             {% endfor %}
         </table>
     </fieldset>
-    <button type="button"><a href="{% url 'home' %}">Voltar</a></button> 
+    <button type="button"><a href="{% url 'home_garcon' %}">Voltar</a></button> 
+    <button type="button"><a style="color: green;" href="{% url 'novo_pedido' %}">Novo Pedido</a></button>
 </body>
 </html>
