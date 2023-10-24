@@ -31,6 +31,7 @@ urlpatterns = [
     path('excluir_pedido/<int:id_pedido>', excluir_pedido, name='excluir_pedido'),
     path('fechar_pedido/<int:id_pedido>', fechar_pedido, name='fechar_pedido'),
     path('pagina_erro/', pagina_erro, name='pagina_erro'),
+    path('pagina_erro_user/', pagina_erro_user, name='pagina_erro_user'),
 
     # CRUD DE LOGIN
     path('cadastrar_usuario/', cadastrar_usuario, name='cadastrar_usuario'),

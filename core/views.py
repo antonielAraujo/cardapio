@@ -11,11 +11,17 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 def home(request):
     return render(request, 'home.html')
+
 @login_required(login_url='logar/')
 def home_adm(request):
-    return render(request, 'home_adm.html')
+    if request.user.is_staff == 1:
+        return render(request, 'home_adm.html')
+    elif request.user.is_staff == 0:
+        return redirect(pagina_erro_user)
+    
+
 @login_required(login_url='logar/')
-def home_garcon(request):
+def home_garcon(request):  
     return render(request, 'home_garcon.html')
 
 ### CRIAÇÃO DOS LOGINS
@@ -62,15 +68,21 @@ def deslogar(request):
 @login_required(login_url='logar/')
 def cad_categoria(request):
     categorias = Categoria.objects.all()
-    if request.method == 'POST':
-        form = FormCadCategoria(request.POST)
-        if form.is_valid():
-            if request.user.is_staff == 1:
+    if request.user.is_staff == 1:
+        if request.method == 'POST':   
+            form = FormCadCategoria(request.POST)
+            if form.is_valid():
                 form.save()
                 return redirect(cad_categoria)
+    elif request.user.is_staff == 0:
+        return redirect(pagina_erro_user)
     else:
         form = FormCadCategoria()
-    return render(request, 'cad_categoria.html', {'formCadCategoria': form, 'categorias': categorias})
+    context = {
+        'formCadCategoria': form,
+        'categorias': categorias
+    }
+    return render(request, 'cad_categoria.html', context)
 
 # FUNÇÃO EXIBIR CATEGORIAS
 @login_required(login_url='logar/')
@@ -85,13 +97,14 @@ def exibir_categorias(request):
 @login_required(login_url='logar/')
 def editar_categoria(request, id_categoria):
     categoria_puxada = Categoria.objects.get(id=id_categoria)
-    
-    if request.method == 'POST':
-        form = FormCadCategoria(request.POST, instance=categoria_puxada)
-        if form.is_valid():
-            if request.user.is_staff == 1:
+    if request.user.is_staff == 1:
+        if request.method == 'POST':
+            form = FormCadCategoria(request.POST, instance=categoria_puxada)
+            if form.is_valid():
                 form.save()
                 return redirect(exibir_categorias)
+    elif request.user.is_staff == 0:
+        return redirect(pagina_erro_user)
     else:
         form = FormCadCategoria(instance=categoria_puxada)
     context = {
@@ -107,6 +120,9 @@ def excluir_categoria(request, id_categoria):
         categoria_puxada = Categoria.objects.get(id=id_categoria)
         categoria_puxada.delete()
         return redirect(exibir_categorias)
+    elif request.user.is_staff == 0:
+        return redirect(pagina_erro_user)
+    
 ### FIM DO CRUD DE CATEGORIA
 
 
@@ -116,12 +132,14 @@ def excluir_categoria(request, id_categoria):
 @login_required(login_url='logar/')
 def cad_comida(request):
     comidas = Comida.objects.all()
-    if request.method == 'POST':
-        form = FormCadComida(request.POST, request.FILES)
-        if form.is_valid():
-            if request.user.is_staff == 1:
+    if request.user.is_staff == 1:
+        if request.method == 'POST':
+            form = FormCadComida(request.POST, request.FILES)
+            if form.is_valid():            
                 form.save()
                 return redirect(cad_comida)
+    elif request.user.is_staff == 0:
+        return redirect(pagina_erro_user)
     else:
         form = FormCadComida()
     return render(request, 'cad_comida.html', {'formCadComida': form, 'comidas': comidas})
@@ -139,13 +157,14 @@ def exibir_comidas(request):
 @login_required(login_url='logar/')
 def editar_comida(request, id_comida):
     comida_puxada = Comida.objects.get(id=id_comida)
-    
-    if request.method == 'POST':
-        form = FormCadComida(request.POST, request.FILES, instance=comida_puxada)
-        if form.is_valid():
-            if request.user.is_staff == 1:
+    if request.user.is_staff == 1:
+        if request.method == 'POST':
+            form = FormCadComida(request.POST, request.FILES, instance=comida_puxada)
+            if form.is_valid():
                 form.save()
                 return redirect(exibir_comidas)
+    elif request.user.is_staff == 0:
+        return redirect(pagina_erro_user)
     else:
         form = FormCadComida(instance=comida_puxada)
     context = {
@@ -273,3 +292,10 @@ def fechar_pedido(request, id_pedido):
 # FUNÇÃO PÁGINA DE ERRO
 def pagina_erro(request):
     return render(request, 'pagina_erro.html')
+# FUNÇÃO PÁGINA ERRO PARA USUÁRIO
+def pagina_erro_user(request):
+    usuario = request.user.username
+    context = {
+        'usuario': usuario
+    }
+    return render(request, 'pagina_erro_user.html', context)
