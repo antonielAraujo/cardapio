@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrativo</title>
 </head>
-<body style="align-content: center; align-items: center;">
-    <div style="display: flex; text-align: center; align-content: center; align-items: center; justify-content: center;">
+<body style="background-color: black; color: red; align-content: center; align-items: center;">
+    <div style="display: flex; flex-direction: column; text-align: center; align-content: center; align-items: center; justify-content: center;">
+        <p><button type="button"><a href="{% url 'deslogar' %}">Sair</a></button></p>
         <fieldset>
-            <legend><h3>MENÚ</h3></legend>
+            <legend><h3>Bem vindo, {{usuario}}!</h3></legend>
             <button type="button"><a href="{% url 'cad_categoria' %}">Cadastrar Categorias</a></button>
             <button type="button"><a href="{% url 'exibir_categorias' %}">Exibir Categorias</a></button>
             <button type="button"><a href="{% url 'cad_comida' %}">Cadastrar Comidas</a></button>
@@ -17,6 +18,5 @@
         </fieldset>
     </div>
     <br>
-    <button type="button"><a href="{% url 'deslogar' %}">Sair</a></button>
 </body>
 </html>

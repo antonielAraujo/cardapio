@@ -8,21 +8,26 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 # Create your views here.
 
 ## HOME DOS USUÁRIOS
-
+@login_required(login_url='logar/')
 def home(request):
     return render(request, 'home.html')
 
-@login_required(login_url='logar/')
 def home_adm(request):
     if request.user.is_staff == 1:
-        return render(request, 'home_adm.html')
+        usuario = request.user.username
+        context = {
+            'usuario': usuario
+        }
+        return render(request, 'home_adm.html', context)
     elif request.user.is_staff == 0:
         return redirect(pagina_erro_user)
     
-
-@login_required(login_url='logar/')
-def home_garcon(request):  
-    return render(request, 'home_garcon.html')
+def home_garcon(request):
+    usuario = request.user.username
+    context = {
+        'usuario': usuario
+    }  
+    return render(request, 'home_garcon.html', context)
 
 ### CRIAÇÃO DOS LOGINS
 
@@ -74,15 +79,16 @@ def cad_categoria(request):
             if form.is_valid():
                 form.save()
                 return redirect(cad_categoria)
+        else:
+            form = FormCadCategoria()
+        context = {
+            'formCadCategoria': form,
+            'categorias': categorias
+        }
+        return render(request, 'cad_categoria.html', context)
     elif request.user.is_staff == 0:
         return redirect(pagina_erro_user)
-    else:
-        form = FormCadCategoria()
-    context = {
-        'formCadCategoria': form,
-        'categorias': categorias
-    }
-    return render(request, 'cad_categoria.html', context)
+    
 
 # FUNÇÃO EXIBIR CATEGORIAS
 @login_required(login_url='logar/')
@@ -103,15 +109,16 @@ def editar_categoria(request, id_categoria):
             if form.is_valid():
                 form.save()
                 return redirect(exibir_categorias)
+        else:
+            form = FormCadCategoria(instance=categoria_puxada)
+        context = {
+            'form' : form,
+            'categoria': categoria_puxada
+        }
+        return render(request, 'editar_categoria.html', context)
     elif request.user.is_staff == 0:
         return redirect(pagina_erro_user)
-    else:
-        form = FormCadCategoria(instance=categoria_puxada)
-    context = {
-        'form' : form,
-        'categoria': categoria_puxada
-    }
-    return render(request, 'editar_categoria.html', context)
+
 
 # FUNÇÃO EXCLUIR CATEGORIA
 @login_required(login_url='logar/')
@@ -138,11 +145,11 @@ def cad_comida(request):
             if form.is_valid():            
                 form.save()
                 return redirect(cad_comida)
+        else:
+            form = FormCadComida()
+        return render(request, 'cad_comida.html', {'formCadComida': form, 'comidas': comidas})
     elif request.user.is_staff == 0:
         return redirect(pagina_erro_user)
-    else:
-        form = FormCadComida()
-    return render(request, 'cad_comida.html', {'formCadComida': form, 'comidas': comidas})
 
 # FUNÇÃO EXIBIR COMIDAS
 @login_required(login_url='logar/')
@@ -163,16 +170,16 @@ def editar_comida(request, id_comida):
             if form.is_valid():
                 form.save()
                 return redirect(exibir_comidas)
+        else:
+            form = FormCadComida(instance=comida_puxada)
+        context = {
+            'form': form,
+            'comida': comida_puxada
+        }
+        return render(request, 'editar_comida.html', context)
     elif request.user.is_staff == 0:
         return redirect(pagina_erro_user)
-    else:
-        form = FormCadComida(instance=comida_puxada)
-    context = {
-        'form': form,
-        'comida': comida_puxada
-    }
-    return render(request, 'editar_comida.html', context)
-
+    
 # FUNÇÃO EXCLUIR COMIDA
 @login_required(login_url='logar/')
 def excluir_comida(request, id_comida):
@@ -269,6 +276,7 @@ def excluir_item_pedido(request, id_comidas_pedidos):
     else:
         comida_pedido.delete()
         return redirect(exibir_pedidos)
+    
 # FUNÇÃO EXCLUIR PEDIDO
 @login_required(login_url='logar/')
 def excluir_pedido(request, id_pedido):
@@ -292,6 +300,7 @@ def fechar_pedido(request, id_pedido):
 # FUNÇÃO PÁGINA DE ERRO
 def pagina_erro(request):
     return render(request, 'pagina_erro.html')
+
 # FUNÇÃO PÁGINA ERRO PARA USUÁRIO
 def pagina_erro_user(request):
     usuario = request.user.username

@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Área do Garçon</title>
 </head>
-<body>
+<body style="background-color: black; color: red;">
     <div style="display: flex; align-content: center; text-align: center; align-items: center;">
         <fieldset>
-            <legend><h3>PEDIDOS</h3></legend>
-            <button type="button"><a href="{% url 'novo_pedido' %}">Novo Pedido</a></button>
+            <legend><h3>Bem vindo, {{usuario}}!</h3></legend>
             <button type="button"><a href="{% url 'exibir_pedidos' %}">Exibir Pedidos</a></button>
+            <button type="button"><a href="{% url 'deslogar' %}">Sair</a></button>
         </fieldset>
     </div>
     <br>
-    <button type="button"><a href="{% url 'deslogar' %}">Sair</a></button>
 </body>
 </html>
