@@ -221,7 +221,7 @@ def exibir_pedidos(request):
 def adicionar_comida(request, id_pedido):
     pedido = Pedido.objects.get(id=id_pedido)
     comidas = Comida.objects.all()
-    if pedido.pagamento == 'F':
+    if pedido.pagamento == True:
         return redirect(pagina_erro)
     elif request.method == 'POST':
         form = FormComidasPedidos(request.POST)
@@ -252,7 +252,7 @@ def resumo_pedido(request, id_pedido):
 @login_required(login_url='logar/')
 def editar_resumo_pedido(request, id_comidas_pedidos):
     comida_pedido = ComidasPedidos.objects.get(id=id_comidas_pedidos)
-    if comida_pedido.pedido.pagamento == 'F':
+    if comida_pedido.pedido.pagamento == True:
          return redirect(pagina_erro)
     elif request.method == 'POST':
         form = FormComidasPedidos(request.POST, instance=comida_pedido)
@@ -271,7 +271,7 @@ def editar_resumo_pedido(request, id_comidas_pedidos):
 @login_required(login_url='logar/')
 def excluir_item_pedido(request, id_comidas_pedidos):
     comida_pedido = ComidasPedidos.objects.get(id=id_comidas_pedidos)
-    if comida_pedido.pedido.pagamento == 'F':
+    if comida_pedido.pedido.pagamento == True:
          return redirect(pagina_erro)
     else:
         comida_pedido.delete()
@@ -281,7 +281,7 @@ def excluir_item_pedido(request, id_comidas_pedidos):
 @login_required(login_url='logar/')
 def excluir_pedido(request, id_pedido):
     pedido = Pedido.objects.get(id=id_pedido)
-    if pedido.pagamento == 'F':
+    if pedido.pagamento == True:
         return redirect(pagina_erro)
     pedido.delete()
     return redirect(exibir_pedidos)
@@ -290,10 +290,10 @@ def excluir_pedido(request, id_pedido):
 @login_required(login_url='logar/')
 def fechar_pedido(request, id_pedido):
     pedido = Pedido.objects.get(id=id_pedido)
-    if pedido.pagamento == 'F':
+    if pedido.pagamento == True:
         return redirect(pagina_erro)
-    elif pedido.pagamento == 'A':
-        pedido.pagamento = 'F'
+    elif pedido.pagamento == False:
+        pedido.pagamento = True
         pedido.save()
         return redirect(exibir_pedidos)
 

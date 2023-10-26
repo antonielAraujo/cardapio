@@ -21,7 +21,8 @@ class Comida(models.Model):
         
 class Pedido(models.Model):
     data = models.DateTimeField(default=datetime.now())
-    pagamento = models.CharField(max_length=1, default='A')
+    # pagamento = models.CharField(max_length=1, default='A')
+    pagamento = models.BooleanField()
     def __str__(self):
         return f'{self.id}'
 
