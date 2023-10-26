@@ -1,6 +1,5 @@
 from django.db import models
 from datetime import datetime
-from django.db.models import Sum
 
 # Create your models here.
 
@@ -23,7 +22,6 @@ class Comida(models.Model):
 class Pedido(models.Model):
     data = models.DateTimeField(default=datetime.now())
     pagamento = models.CharField(max_length=1, default='A')
-    total = models.Sum()
     def __str__(self):
         return f'{self.id}'
 
