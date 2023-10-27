@@ -7,7 +7,7 @@
 </head>
 <body style="background-color: black; color: red;">
     <h1>Todos os Pedidos</h1>
-    <p><button type="button"><a style="color: green;" href="{% url 'novo_pedido' %}">Novo Pedido</a></button></p>
+    <p><button type="button"><a style="text-decoration: none; color: green;" href="{% url 'novo_pedido' %}">Novo Pedido</a></button></p>
     <fieldset>
         <table>
             <tr>
@@ -20,14 +20,14 @@
                 <td style="text-align: center;">{{pedido.id}}</td>
                 <td>{{pedido.data}}</td>
                 <td style="text-align: center;">{{pedido.pagamento}}</td>
-                <td><button type="button"><a href="{% url 'adicionar_comida' pedido.id %}">Adicionar comidas</a></button></td>
-                <td><button type="button"><a href="{% url 'resumo_pedido' pedido.id %}">Resumo do Pedido</a></button></td>
-                <td><button type="button"><a style="color: green;" href="{% url 'fechar_pedido' pedido.id %}">Fechar Pedido</a></button></td>
-                <td><button type="button"><a style="color: red;" href="{% url 'excluir_pedido' pedido.id %}">Excluir</a></button></td>
+                <td><button type="button"><a style="text-decoration: none;" href="{% url 'adicionar_comida' pedido.id %}">Adicionar comidas</a></button></td>
+                <td><button type="button"><a style="text-decoration: none;" href="{% url 'resumo_pedido' pedido.id %}">Resumo do Pedido</a></button></td>
+                <td><button type="button"><a style="text-decoration: none; color: green;" href="{% url 'fechar_pedido' pedido.id %}">Fechar Pedido</a></button></td>
+                <td><button type="button"><a style="text-decoration: none; color: red;" href="{% url 'excluir_pedido' pedido.id %}">Excluir</a></button></td>
             </tr>
             {% endfor %}
         </table>
     </fieldset>
-    <p><button type="button"><a href="{% url 'home_garcon' %}">Voltar</a></button></p>
+    <p><button type="button"><a style="text-decoration: none; text-decoration: none;" href="{% url 'home_garcon' %}">Voltar</a></button></p>
 </body>
 </html>

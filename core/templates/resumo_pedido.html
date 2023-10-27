@@ -19,12 +19,12 @@
                 <td style="text-align: center;">{{p.pedido}}</td>
                 <td>{{p.comida}}</td>
                 <td style="text-align: center;">{{p.quantidade}}</td>
-                <td><button type="button"><a style="color: yellow; background-color: darkgrey;" href="{% url 'editar_resumo_pedido' p.id %}">Editar</a></button></td>
-                <td><button type="button"><a style="color: red;" href="{% url 'excluir_item_pedido' p.id %}">Excluir</a></button></td>
+                <td><button type="button"><a style="text-decoration: none; color: yellow; background-color: darkgrey;" href="{% url 'editar_resumo_pedido' p.id %}">Editar</a></button></td>
+                <td><button type="button"><a style="text-decoration: none; color: red;" href="{% url 'excluir_item_pedido' p.id %}">Excluir</a></button></td>
             </tr>
             {% endfor %}
         </table>
     </fieldset>
-    <button><a href="{% url 'exibir_pedidos' %}">Voltar</a></button>
+    <button><a style="text-decoration: none;" href="{% url 'exibir_pedidos' %}">Voltar</a></button>
 </body>
 </html>

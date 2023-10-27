@@ -13,7 +13,7 @@
             {% csrf_token %}
             {{form.as_p}}
             <button type="submit">Logar</button>
-            <button type="button"><a style="color: blue;" href="{% url 'cadastrar_usuario' %}">Cadastre-se!</a></button>
+            <button type="button"><a style="text-decoration: none; color: blue;" href="{% url 'cadastrar_usuario' %}">Cadastre-se!</a></button>
         </form>
     </fieldset>
 </body>
