@@ -4,15 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurante da Zefinha</title>
+    <style>
+        body {
+            background-color: black;
+            color: red;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        fieldset {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
 </head>
-<body style="background-color: black; color: red;">
-    <fieldset style="display: flex; flex-direction: column; text-align: center; align-content: center; align-items: center; justify-content: center;">
+<body>
+    <fieldset>
         <legend><h1>Restaurante da Zefinha</h1></legend>
         <h2>LOGIN</h2>
         <form action="{% url 'logar' %}" method="post">
             {% csrf_token %}
             {{form.as_p}}
             <button type="submit">Logar</button>
+            <br>
             <button type="button"><a style="text-decoration: none; color: blue;" href="{% url 'cadastrar_usuario' %}">Cadastre-se!</a></button>
         </form>
     </fieldset>
